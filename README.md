@@ -4,79 +4,94 @@
 [![YouTube](https://img.shields.io/badge/YouTube-white?logo=youtube&logoColor=FF0000)](https://www.youtube.com/@lyyontop)
 [![GitHub last commit](https://img.shields.io/github/last-commit/AzidoPP/HVCCPS-V1.4?color=yellow&logo=github&labelColor=black&label=Latest)](https://github.com/AzidoPP/HVCCPS-V1.4)
 
-## English
 
-[中文](#中文)
+一、项目信息
+HVCCPS V1.4 是一款基于 STM32G474CBT6 的高压数控电源，拥有40W/in^3的较高功率密度。 可用于电容充电和高压实验。
 
-HVCCPS is a STM32G474CBT6-based digitally controlled PSFB high-voltage DC-DC power supply. It is designed for capacitor charging and laboratory high-voltage experiments. The rated input is 18-28 V, with 24 V recommended. The public firmware limits the output to 0-2200 V, 200 mA, and 400 W. Communication uses USART3 and browser-based WebSerial host tools.
+PCB采用EasyEDA（立创EDA专业版）设计，工程[工程](PCB/ProPrj_HVCCPS_V1.4_Release.epro2)文件包含了完整的设计数据，方便复刻和二次开发。
 
-High-voltage power supplies can cause electric shock, stored-energy discharge, component failure, and fire. Use proper isolation, grounding, discharge paths, current limiting, and emergency shutdown hardware.
-
-### Repository Contents
-
-| Path | Description |
-|------|-------------|
-| `AppHostUI/` | Browser WebSerial host UI for power control and telemetry |
-| `BootLoaderHostUI/` | Browser WebSerial IAP flashing UI for App firmware |
-| `Docs/` | STM32G4, HRTIM, and device reference documents |
-| `Test_Data/` | Test data, analysis scripts, and plots |
-| `log.md` | Detailed change log |
-
-Firmware is published as Bootloader HEX and App HEX files in GitHub Releases. The Bootloader and App use the same STM32G474CBT6 target, 8 MHz HSE to 170 MHz system clock, USART3 PB10/PB11 at 115200 8N1, and the same panel LEDs and keys.
-
-### Public Firmware Limits
-
-| Item | Limit |
-|------|-------|
-| CV target | 0-2200 V |
-| CC target | 0-200 mA |
-| CP target | 0-400 W |
-| Hardware OCP | Primary-side SW-node AC current, approx. 60 A |
-| Software OTP | MOS NTC or internal MCU temperature above 70 °C |
-
-The host UI input ranges, panel-key preset ranges, and firmware command validation ranges are aligned.
-
-### Flashing
-
-#### ST-Link
-
-Use an ST-Link tool to flash the two HEX files from GitHub Releases.
-
-| Firmware | Address |
-|----------|---------|
-| Bootloader HEX | Starts at `0x08000000` |
-| App HEX | Starts at `0x08004000` |
-
-#### WebSerial IAP
-
-Flash the Bootloader HEX with ST-Link first. Then open `BootLoaderHostUI/index.html`, select the App HEX, connect the serial port, click flash, and press the hardware RST key. The page waits for the Bootloader to enter IAP and then runs the BEGIN -> REQUEST/DATA -> STATUS flow.
-
-### Host UIs
-
-`AppHostUI/index.html` provides run control, CC/CV/CP target settings, fixed-duty debug mode, key telemetry cards, live plots, and configuration panels. A browser with WebSerial support is required. Serial parameters are 115200 8N1.
-
-`BootLoaderHostUI/index.html` supports Intel HEX parsing, address-range checks, serial handshake, block transfer, progress display, and error logs.
-
-### Flash Layout
-
-| Region | Address | Size |
-|--------|---------|------|
-| Bootloader | `0x08000000`-`0x080037FF` | 14 KB |
-| Bootloader metadata page | `0x08003800`-`0x08003FFF` | 2 KB |
-| App | `0x08004000`-`0x0801F7FF` | 110 KB |
-| App configuration page | `0x0801F800`-`0x0801FFFF` | 2 KB |
-
-### License
-
-This repository is licensed under GPL-3.0. See `LICENSE`.
-
-## 中文
-
-[English](#english)
-
-HVCCPS 是一款基于 STM32G474CBT6 的 PSFB 移相全桥数控高压 DC-DC 电源，可用于电容充电和高压实验。额定输入 18-28 V，推荐 24 V。公开固件限制输出为 0-2200 V、200 mA、400 W。设备通过 USART3 通信，上位机为基于 WebSerial 的浏览器页面。
+**本工程遵循GPL协议，但为避免闭源抄袭或闭源商用，固件仅公开开放编译后的.hex文件，如需源码请加qq群582594264或联系Lanyyontop@gmail.com后免费提供**
 
 高压电源具有触电、储能电容放电、器件击穿和火灾风险。使用前请确认隔离、接地、放电、电流限制和外部急停措施齐备。
+
+基本参数如下：
+数控电源：基于PSFB移相全桥
+输入接口|XT30接口
+输出接口 M3螺柱
+
+电气参数
+
+|电气参数|最小值|典型值|最大值|单位|
+|输入电压(DC)|18|/|30|V|
+|输入电流(DC)|/|/|20|A|
+|输出电压(DC)|0|可调|2200|V|
+|输出电流(DC)|0|可调|200|mA|
+|输出功率(DC)|0|可调|400|W|
+|频率|11000|/|45000|Hz|
+|变换效率|/|/|96%（详细请参考测试数据）|/|
+|输出电压精度|/|/|±0.5%|/|
+|输出电流精度|/|/|±1%|/|
+
+
+二、架构
+PCB采用4层板设计，全0805封装，方便焊接。板子正面主要被主功率变压器占据，背面则是驱动电路，控制电路等等。
+![顶层](Docs/顶层.png)
+![底层](Docs/顶层.png)
+
+电源架构
+![电源架构](Docs/电源架构.png)
+
+硬件架构
+![硬件架构](Docs/硬件架构.png)
+
+三、制作
+如需复刻请参考以下步骤：
+使用gerber文件打样电路板[Gerber制板文件](PCB/Gerber_HVCCPS_V1.4.zip)，1.6mm厚，1oz铜箔即可。
+
+按照以下参数打样变压器
+![变压器](Docs/变压器打样参数.jpg)
+```
+磁芯EC49
+
+40材
+
+匝数比9:900
+
+初级线圈2-3(尽量选择更粗的线，至少需要过30A电流以上)。
+次级线圈5-8直径0.3mm线。
+
+灌胶密封，灌胶前先裁剪掉多余引脚，裁剪掉6、7、1、4和中间两个脚。
+不需要气隙，需要漏感最小化。
+绕线方向正反均可。
+```
+
+推荐淘宝店铺"祥润电子磁芯骨架"，地址：shop339657327.taobao.com
+直接把打样参数发给老板即可。
+
+bom采购
+
+这里有几个原件需要稍微注意，如果找不到可以参考以下链接，或是一些注意事项：
+L1  https://item.taobao.com/item.htm?id=524929973196
+R8 热敏电阻 https://detail.tmall.com/item.htm?id=610279139920 选择10k B=3450
+Q1,Q2,Q3,Q4 主功率管，这里可以选择CSD18540或者CSD19531均可
+R24,R25,R26,R27,R28 高压分压电阻，耐压尽量选择高一点的，这里选择的是Viking光颉高压电阻https://item.taobao.com/item.htm?id=987002402599
+U7,U8 UCC27211 由于这个芯片假货比较多，推荐使用slm27211，可以直接pin-to-pin替换。
+
+如果打算作为通用高压电源使用，还需要加装一个一个输出电容。我选择的是4000V 0.2uF薄膜电容https://item.taobao.com/item.htm?id=814880889031如果作为高压电容充电器使用，可以不用加这个电容。
+
+
+焊接
+这里推荐使用锡膏+加热台焊接。相信复刻这个项目的都是焊接老手了，这里不过多赘述。
+
+![制作完成1](Docs/制作完成.png)
+![制作完成2](Docs/制作完成2.png)
+
+如果需要输出电容，可以焊接两个端子到电容引脚后用螺丝固定。
+
+![电容连接](Docs/输出电容的连接.png)
+
+注：顺带一提，副边的电路全部是按照7000V的耐压设计的（电气间隙均>=9.5mm），如果需要更高电压版本，只需要更换不同变压比的变压器，再略微修改代码即可。
+
 
 ### 仓库内容
 
