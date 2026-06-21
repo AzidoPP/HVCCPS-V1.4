@@ -1,6 +1,12 @@
 # HVCCPS V1.4
 
+[![Bilibili followers](https://img.shields.io/badge/dynamic/json?color=blue&label=BiliBili&labelColor=white&query=$.data.follower&url=https://api.bilibili.com/x/relation/stat?vmid=1084866085&logo=bilibili)](https://space.bilibili.com/1084866085)
+[![YouTube](https://img.shields.io/badge/YouTube-white?logo=youtube&logoColor=FF0000)](https://www.youtube.com/@lyyontop)
+[![GitHub last commit](https://img.shields.io/github/last-commit/AzidoPP/HVCCPS-V1.4?color=yellow&logo=github&labelColor=black&label=Latest)](https://github.com/AzidoPP/HVCCPS-V1.4)
+
 ## English
+
+[中文](#中文)
 
 HVCCPS is a STM32G474CBT6-based digitally controlled PSFB high-voltage DC-DC power supply. It is designed for capacitor charging and laboratory high-voltage experiments. The rated input is 18-28 V, with 24 V recommended. The public firmware limits the output to 0-2200 V, 200 mA, and 400 W. Communication uses USART3 and browser-based WebSerial host tools.
 
@@ -65,6 +71,8 @@ Flash the Bootloader HEX with ST-Link first. Then open `BootLoaderHostUI/index.h
 This repository is licensed under GPL-3.0. See `LICENSE`.
 
 ## 中文
+
+[English](#english)
 
 HVCCPS 是一款基于 STM32G474CBT6 的 PSFB 移相全桥数控高压 DC-DC 电源，可用于电容充电和高压实验。额定输入 18-28 V，推荐 24 V。公开固件限制输出为 0-2200 V、200 mA、400 W。设备通过 USART3 通信，上位机为基于 WebSerial 的浏览器页面。
 
