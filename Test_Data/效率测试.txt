@@ -1,3 +1,5 @@
+注：测试数据输入电流由板载霍尔电流传感器测得，可能有一定偏移。
+
 f: 50000Hz, duty: 19.9%, eff: 84.08%, Ipri: 0.1197A, Isec: 19.96mA, Vsec: 98.78V, Vpri: 19.58V
 f: 50000Hz, duty: 20%, eff: 73.59%, Ipri: 0.1391A, Isec: 20.15mA, Vsec: 99.49V, Vpri: 19.59V
 f: 50000Hz, duty: 20%, eff: 72.25%, Ipri: 0.1411A, Isec: 20.14mA, Vsec: 99.19V, Vpri: 19.6V
