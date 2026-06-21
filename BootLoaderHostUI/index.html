@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HVCCPS IAP</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>HVCCPS IAP</h1>
+      <p>STM32G474 UART3 firmware loader</p>
+    </div>
+    <div class="link-status" id="linkStatus">DISCONNECTED</div>
+  </header>
+
+  <main class="shell">
+    <section class="panel">
+      <div class="toolbar">
+        <button id="connectButton" type="button">Connect</button>
+        <button id="disconnectButton" type="button" disabled>Disconnect</button>
+        <label class="file-button">
+          <input id="fileInput" type="file" accept=".hex,.bin,application/octet-stream">
+          Select HEX/BIN
+        </label>
+      </div>
+
+      <dl class="info-grid">
+        <div>
+          <dt>File</dt>
+          <dd id="fileName">--</dd>
+        </div>
+        <div>
+          <dt>Address</dt>
+          <dd id="imageAddress">--</dd>
+        </div>
+        <div>
+          <dt>Size</dt>
+          <dd id="imageSize">--</dd>
+        </div>
+        <div>
+          <dt>CRC32</dt>
+          <dd id="imageCrc">--</dd>
+        </div>
+      </dl>
+
+      <div class="actions">
+        <button class="primary" id="flashButton" type="button" disabled>Flash Firmware</button>
+        <button id="abortButton" type="button" disabled>Abort</button>
+      </div>
+
+      <div class="progress-wrap" aria-label="Flash progress">
+        <div class="progress-bar">
+          <div id="progressFill"></div>
+        </div>
+        <div class="progress-meta">
+          <span id="progressText">0%</span>
+          <span id="phaseText">Idle</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel log-panel">
+      <div class="log-head">
+        <h2>Log</h2>
+        <button id="clearLogButton" type="button">Clear</button>
+      </div>
+      <pre id="logOutput"></pre>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,74 @@
+# ===== Keil MDK-ARM build output =====
+**/MDK-ARM/G474_HVCCPS/
+**/MDK-ARM/G474_BL/
+**/MDK-ARM/Objects/
+**/MDK-ARM/Listings/
+**/MDK-ARM/RTE/_*/
+*.axf
+*.hex
+*.bin
+*.elf
+*.map
+*.lst
+*.crf
+*.o
+*.d
+*.dep
+*.lnp
+*.htm
+*.build_log.htm
+
+# ===== Keil user-specific files (contain username / personal layout) =====
+*.uvguix.*
+*.uvoptx
+*.uvopt
+*.uvmpw.*_Opt.bak
+*.uvprojx.bak
+*.uvoptx.bak
+JLinkLog.txt
+JLinkSettings.ini
+DebugConfig/
+
+# ===== STM32CubeMX =====
+.mxproject
+*.ioc.bak
+
+# ===== GCC / Makefile builds (in case of future toolchain switch) =====
+build/
+Build/
+Debug/
+Release/
+Output/
+
+# ===== IDE / Editor =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.cproject
+.project
+.settings/
+.metadata/
+
+# ===== OS =====
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+.DS_Store
+$RECYCLE.BIN/
+
+# ===== Logs / temp =====
+*.log
+*.tmp
+*.bak
+*.orig
+
+# ===== Node / HostUI dev artifacts (if added later) =====
+node_modules/
+dist/
+.cache/
+
+# ===== Claude Code local config (per-machine settings) =====
+.claude/
+CLAUDE.local.md

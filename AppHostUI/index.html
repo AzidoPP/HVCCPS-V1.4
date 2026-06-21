@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>G474 HVCCPS Operator Console</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <script src="protocol.js" defer></script>
+  <script src="history.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">HV</span>
+      <span class="brand-title">G474 HVCCPS</span>
+      <span class="brand-subtitle">Operator Console</span>
+    </div>
+
+    <div class="system-strip" aria-label="System status">
+      <button class="status-pill" id="linkPill" type="button" aria-label="Open serial connection panel">
+        <span class="pill-dot" id="linkDot"></span>
+        <span class="pill-text">
+          <strong id="linkLabel">DISCONNECTED</strong>
+          <em id="linkMeta">0 pkt/s</em>
+        </span>
+      </button>
+      <button class="status-pill" id="outputPill" type="button" aria-label="Open run controls">
+        <span class="pill-dot" id="outputDot"></span>
+        <span class="pill-text">
+          <strong id="outputLabel">OUTPUT OFF</strong>
+          <em id="outputMeta">MODE --</em>
+        </span>
+      </button>
+      <div class="status-pill status-static" aria-label="Monitor view active">
+        <span class="pill-dot dot-monitor"></span>
+        <span class="pill-text">
+          <strong>MONITOR</strong>
+          <em>live dashboard</em>
+        </span>
+      </div>
+    </div>
+
+    <nav class="mode-actions" aria-label="Primary work areas">
+      <button class="tool-button" id="openConnectButton" type="button" title="Serial link">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 5h8v5H6zM8 10v5m4-5v5M5 15h10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Connect</span>
+      </button>
+      <button class="tool-button tool-primary" id="openRunButton" type="button" title="Run control">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v8M6 5a6 6 0 1 0 8 0" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+        <span>Run</span>
+      </button>
+      <button class="tool-button" id="openCycleButton" type="button" title="Single-cycle waveform">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 12c2 0 2-7 4-7s2 14 4 14s2-7 4-7s2 0 2 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Cycle Plot</span>
+      </button>
+      <button class="tool-button" id="openConfigureButton" type="button" title="Configuration">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 7a3 3 0 1 0 0 6a3 3 0 0 0 0-6zM10 2v3M10 15v3M2 10h3M15 10h3M4.3 4.3l2.1 2.1M13.6 13.6l2.1 2.1M15.7 4.3l-2.1 2.1M6.4 13.6l-2.1 2.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Configure</span>
+      </button>
+      <button class="tool-button" id="openPresetsButton" type="button" title="Front-panel key presets">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="6" height="12" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="11" y="4" width="6" height="12" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 13V7M14 13v-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>Presets</span>
+      </button>
+      <button class="icon-button" id="undoButton" type="button" title="Undo (Ctrl+Z)" aria-label="Undo" disabled>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 6 4 10l4 4M4 10h8a4 4 0 0 1 4 4v1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="icon-button" id="redoButton" type="button" title="Redo (Ctrl+Y)" aria-label="Redo" disabled>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m12 6 4 4-4 4M16 10H8a4 4 0 0 0-4 4v1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <div class="emergency-bar" id="emergencyBar" hidden>
+    <strong>OUTPUT LIVE</strong>
+    <span id="emergencyMeta">RUN --</span>
+    <button class="danger-button" id="emergencyDisableButton" type="button">Disable Now</button>
+  </div>
+
+  <main class="monitor-shell">
+    <section class="plot-panel" aria-label="Telemetry plot">
+      <div class="live-control-strip" id="liveControlStrip" hidden>
+        <strong id="liveControlTitle">OUTPUT LIVE</strong>
+        <span id="liveControlMeta">RUN --</span>
+        <button class="primary-button compact" id="liveUpdateTargetsButton" type="button">Update Targets</button>
+        <button class="danger-button compact" id="liveDisableButton" type="button">Disable</button>
+      </div>
+      <header class="panel-head">
+        <div>
+          <h1>Telemetry Plot</h1>
+          <span id="plotSubtitle">VSEC / ISEC / IPRI AC</span>
+        </div>
+        <div class="panel-actions">
+          <button id="toggleChartSignalsButton" class="small-button" type="button" aria-expanded="false" title="Select plotted signals">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 5h12M7 10h6M9 15h2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span id="chartSelectionSummary">3 selected</span>
+          </button>
+          <button id="pauseChartButton" class="small-button" type="button" aria-pressed="false" title="Pause plot scrolling">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Pause</span>
+          </button>
+          <button id="resetChartSelectionButton" class="small-button" type="button" title="Restore default plotted signals">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10a5 5 0 1 0 1.5-3.6M5 5v5h5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Default</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="chart-workspace" id="chartWorkspace">
+        <div class="chart-main">
+          <div class="chart-legend" id="chartLegend" aria-label="Selected plot signals"></div>
+          <div class="chart-wrap">
+            <canvas id="telemetryChart"></canvas>
+            <div class="chart-empty" id="chartEmpty" hidden>NO SIGNALS SELECTED</div>
+          </div>
+        </div>
+
+        <aside class="signal-picker" id="signalPicker" aria-label="Signal picker" hidden>
+          <div class="signal-picker-head">
+            <strong>Signals</strong>
+            <span id="signalPickerCount">3 selected</span>
+            <button id="closeSignalPickerButton" class="icon-button" type="button" aria-label="Close signal picker">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 6 8 8M14 6l-8 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+          <label class="search-field">
+            <span>Search</span>
+            <input id="signalSearchInput" type="search" spellcheck="false" autocomplete="off" placeholder="vsec, current, raw">
+          </label>
+          <div class="signal-picker-actions">
+            <button id="selectAllSignalsButton" class="small-button" type="button">All</button>
+            <button id="clearSignalsButton" class="small-button" type="button">Clear</button>
+          </div>
+          <div class="signal-groups" id="signalGroups"></div>
+          <div class="signal-no-match" id="signalNoMatch" hidden>No matching signals</div>
+        </aside>
+      </div>
+    </section>
+
+    <aside class="status-panel" aria-label="Power status">
+      <header class="panel-head panel-head-stack">
+        <div>
+          <h2>Power Status</h2>
+          <span id="statusSubtitle">heartbeat idle</span>
+        </div>
+        <div class="status-chips">
+          <span class="state-chip" id="powerStateChip">LATCH OFF</span>
+          <span class="state-chip" id="driveStateChip">DRIVE OFF</span>
+          <span class="state-chip" id="controlModeChip">MODE --</span>
+          <span class="state-chip" id="keyFlagsChip">KEY NONE</span>
+          <span class="state-chip" id="configOkChip">CFG UNKNOWN</span>
+          <span class="state-chip" id="ocpChip" hidden>OCP</span>
+          <span class="state-chip" id="wdgChip" hidden>WDG</span>
+          <span class="state-chip" id="otpChip" hidden>OTP</span>
+        </div>
+      </header>
+
+      <div class="status-scroll">
+        <div class="readings-key" id="readingsKey"></div>
+
+        <section class="readings-section">
+          <button class="section-toggle" type="button" data-toggle-section="secondary" aria-expanded="true">
+            <span>Secondary Indicators</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="readings-list" id="readingsSecondary" data-section-panel="secondary"></div>
+        </section>
+
+        <section class="readings-section">
+          <button class="section-toggle" type="button" data-toggle-section="debug" aria-expanded="false">
+            <span>Raw / Debug</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="readings-list" id="readingsDebug" data-section-panel="debug" hidden></div>
+        </section>
+      </div>
+    </aside>
+  </main>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+
+  <aside class="drawer drawer-narrow" id="connectDrawer" hidden aria-hidden="true" aria-labelledby="connectTitle">
+    <header class="drawer-head">
+      <div>
+        <h2 id="connectTitle">Serial Link</h2>
+        <span id="webSerialSupportLine">WEBSERIAL READY</span>
+      </div>
+      <button class="icon-button" type="button" data-drawer-close aria-label="Close serial panel">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 6 8 8M14 6l-8 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </header>
+    <div class="drawer-body">
+      <div class="info-row">
+        <span>Authorized Port</span>
+        <strong id="selectedPortReadout">NOT SELECTED</strong>
+      </div>
+      <div class="action-grid">
+        <button id="selectPortButton" class="secondary-button" type="button">Select Port</button>
+        <button id="connectButton" class="primary-button" type="button">Connect</button>
+        <button id="disconnectButton" class="danger-button" type="button">Disconnect</button>
+      </div>
+      <div class="info-row">
+        <span>Status</span>
+        <strong id="connectStatusReadout">Idle</strong>
+      </div>
+      <div class="info-row">
+        <span>Packet Rate</span>
+        <strong id="connectRateReadout">0 pkt/s</strong>
+      </div>
+      <div class="message-line" id="messageLine">READY</div>
+    </div>
+  </aside>
+
+  <aside class="drawer drawer-medium" id="runDrawer" hidden aria-hidden="true" aria-labelledby="runTitle">
+    <header class="drawer-head">
+      <div>
+        <h2 id="runTitle">Run Control</h2>
+        <span id="runDrawerState">OUTPUT OFF</span>
+      </div>
+      <button class="icon-button" type="button" data-drawer-close aria-label="Close run panel">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 6 8 8M14 6l-8 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </header>
+    <div class="drawer-body">
+      <div class="empty-state" id="runDisconnected" hidden>
+        <strong>Serial link required</strong>
+        <button class="primary-button" id="runOpenConnectButton" type="button">Open Serial Link</button>
+      </div>
+
+      <div class="run-connected" id="runConnected" hidden>
+        <div class="live-note" id="runLiveBanner" hidden>OUTPUT LIVE: target values stay available; start mode and duration are locked.</div>
+
+        <fieldset class="form-group">
+          <legend>Targets</legend>
+          <label class="big-input">
+            <span>CV</span>
+            <input id="setVoltageInput" type="number" min="0" max="2200" step="0.1" value="1200">
+            <em>V</em>
+          </label>
+          <label class="big-input">
+            <span>CC</span>
+            <input id="setCurrentInput" type="number" min="0" max="200" step="0.1" value="80">
+            <em>mA</em>
+          </label>
+          <label class="big-input">
+            <span>CP</span>
+            <input id="setPowerInput" type="number" min="0" max="400" step="0.1" value="120">
+            <em>W</em>
+          </label>
+        </fieldset>
+
+        <fieldset class="form-group" id="runDurationGroup">
+          <legend>Duration</legend>
+          <div class="inline-grid">
+            <label class="field">
+              <span>Seconds</span>
+              <input id="runSecondsInput" type="number" min="1" max="65534" step="1" value="10">
+            </label>
+            <label class="check-line">
+              <input id="continuousCheckbox" type="checkbox">
+              <span>Continuous</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-group" id="runStartModeGroup">
+          <legend>Start Mode</legend>
+          <label class="radio-line">
+            <input type="radio" name="startMode" value="regular" id="startModeRegular" checked>
+            <span>Closed-loop CC / CV / CP</span>
+          </label>
+          <label class="radio-line">
+            <input type="radio" name="startMode" value="fixed" id="startModeFixed">
+            <span>Fixed duty debug</span>
+          </label>
+          <div class="fixed-duty-group" id="fixedDutyGroup" hidden>
+            <label class="field">
+              <span>Fixed Duty</span>
+              <input id="fixedDutyInput" type="number" min="0" max="100" step="0.1" value="20">
+              <em>%</em>
+            </label>
+            <div class="warn-block">Fixed duty requires a verified load.</div>
+          </div>
+        </fieldset>
+
+        <div class="validation-line" id="runValidation" hidden></div>
+
+        <div class="drawer-actions">
+          <button id="enableButton" class="start-button" type="button">Start Output</button>
+          <button id="updateTargetsButton" class="primary-button" type="button" hidden>Update Targets</button>
+          <button id="disableButton" class="danger-button" type="button">Disable</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <aside class="drawer drawer-wide" id="configureDrawer" hidden aria-hidden="true" aria-labelledby="configureTitle">
+    <header class="drawer-head">
+      <div>
+        <h2 id="configureTitle">Configuration</h2>
+        <span id="configureDrawerState">SET PENDING</span>
+      </div>
+      <button class="icon-button" type="button" data-drawer-close aria-label="Close configuration panel">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 6 8 8M14 6l-8 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </header>
+
+    <div class="configure-layout">
+      <nav class="configure-tabs" role="tablist" aria-label="Configuration tabs">
+        <button class="configure-tab is-active" type="button" data-config-tab="loop" role="tab" aria-selected="true">Control Loop</button>
+        <button class="configure-tab" type="button" data-config-tab="timing" role="tab" aria-selected="false">HRTIM</button>
+        <button class="configure-tab" type="button" data-config-tab="defaults" role="tab" aria-selected="false">Defaults</button>
+      </nav>
+
+      <div class="configure-pages">
+        <div class="configure-lock" id="configureLock" hidden>
+          <div>
+            <strong>Configuration locked while output is live</strong>
+            <button class="danger-button" id="configureLockDisableButton" type="button">Disable Output</button>
+          </div>
+        </div>
+
+        <section class="configure-page is-active" data-config-page="loop" role="tabpanel">
+          <div class="field-grid grid-3">
+            <label class="field"><span>Kp CV</span><input id="kpCvInput" type="number" step="any" min="0"></label>
+            <label class="field"><span>Ki CV</span><input id="kiCvInput" type="number" step="any" min="0"></label>
+            <label class="field"><span>Kp CC</span><input id="kpCcInput" type="number" step="any" min="0"></label>
+            <label class="field"><span>Ki CC</span><input id="kiCcInput" type="number" step="any" min="0"></label>
+            <label class="field"><span>Kp CP</span><input id="kpCpInput" type="number" step="any" min="0"></label>
+            <label class="field"><span>Ki CP</span><input id="kiCpInput" type="number" step="any" min="0"></label>
+            <label class="field"><span>Soft-start Step</span><input id="softStartStepInput" type="number" step="any" min="0" max="1"></label>
+          </div>
+        </section>
+
+        <section class="configure-page" data-config-page="timing" role="tabpanel" hidden>
+          <div class="timing-overview">
+            <div class="timing-summary">
+              <div><span>Frequency (set · live)</span><strong id="timingFreqSummary">--</strong></div>
+              <div><span>Dead Time</span><strong>200 ns fixed</strong></div>
+              <div><span>Sampling</span><strong id="timingSamplingSummary">--</strong></div>
+            </div>
+          </div>
+
+          <div class="adc-config-grid">
+            <section class="adc-config-block">
+              <header><h3>Master Timing</h3></header>
+              <label class="field">
+                <span>Frequency (Hz)</span>
+                <input id="ctrlFreq" type="number" min="11000" max="45000" step="100">
+              </label>
+              <label class="field">
+                <span>Frequency Policy</span>
+                <select id="freqPolicyInput">
+                  <option value="1">Auto</option>
+                  <option value="0">Fixed</option>
+                </select>
+              </label>
+              <div class="adc-config-note">Rated 11-45 kHz (fixed MUL4 prescaler); the firmware applies a new period reload on the fly. 24 ADC sub-period triggers fit each switching period.</div>
+            </section>
+
+            <section class="adc-config-block">
+              <header><h3>ADC Sampling (fixed)</h3></header>
+              <div class="adc-config-note">
+                <strong>ADC1</strong> 12-bit, 2 ranks (Vsec, Vpri), 2.5 cycle S+H, no oversampling.<br>
+                <strong>ADC2</strong> 8-bit, 3 ranks (Ipri_ac, Isec, Ipri_dc), 2.5 cycle S+H, no oversampling.<br>
+                Both triggered by HRTIM ADC TRG1 = MASTER·CMP1 + TIM C period (24× per switching cycle).
+                Per-rank sample-time / oversampling are fixed in firmware; the full sequence fits T_sw / 24.
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="configure-page" data-config-page="defaults" role="tabpanel" hidden>
+          <div class="defaults-panel">
+            <strong>Device configuration actions</strong>
+            <span>Draft changes stay in RAM until Save writes a full config record to flash.</span>
+            <button id="syncConfigButton" class="secondary-button" type="button">Sync Draft</button>
+            <button id="loadFlashButton" class="secondary-button" type="button">Load Flash</button>
+            <button id="resetSettingsButton" class="secondary-button" type="button">Load Defaults</button>
+            <button id="factoryResetButton" class="danger-button" type="button">Factory Reset</button>
+          </div>
+          <div class="field-grid grid-3" id="advancedConfigGrid"></div>
+        </section>
+      </div>
+    </div>
+
+    <footer class="configure-footer">
+      <div class="validation-line" id="settingsValidation">--</div>
+      <button id="applySettingsButton" class="primary-button" type="button">Apply Settings</button>
+      <button id="saveConfigButton" class="secondary-button" type="button">Save Flash</button>
+    </footer>
+  </aside>
+
+  <aside class="drawer drawer-wide" id="presetsDrawer" hidden aria-hidden="true" aria-labelledby="presetsTitle">
+    <header class="drawer-head">
+      <div>
+        <h2 id="presetsTitle">Button Presets</h2>
+        <span id="presetsDrawerState">KEY A / B run presets</span>
+      </div>
+      <button class="icon-button" type="button" data-drawer-close aria-label="Close presets panel">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 6 8 8M14 6l-8 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </header>
+    <div class="drawer-body">
+      <div class="empty-state" id="presetsDisconnected" hidden>
+        <strong>Serial link required</strong>
+        <button class="primary-button" id="presetsOpenConnectButton" type="button">Open Serial Link</button>
+      </div>
+
+      <div class="presets-connected" id="presetsConnected" hidden>
+        <p class="presets-intro">
+          Each front-panel key runs a stored closed-loop preset with no host attached.
+          Press a key to start its preset; while the output is live, pressing any key stops it.
+          Saved presets persist in flash and are available right after power-up.
+        </p>
+        <div class="live-note" id="presetsLiveBanner" hidden>OUTPUT LIVE: presets are locked while the output is running.</div>
+
+        <div class="preset-columns">
+          <fieldset class="form-group preset-card">
+            <legend>Button A</legend>
+            <label class="check-line">
+              <input id="presetAEnable" type="checkbox">
+              <span>Enable preset (key A starts it)</span>
+            </label>
+            <label class="big-input">
+              <span>CV</span>
+              <input id="presetACvInput" type="number" min="0" max="2200" step="0.1" value="0">
+              <em>V</em>
+            </label>
+            <label class="big-input">
+              <span>CC</span>
+              <input id="presetACcInput" type="number" min="0" max="200" step="0.1" value="0">
+              <em>mA</em>
+            </label>
+            <label class="big-input">
+              <span>CP</span>
+              <input id="presetACpInput" type="number" min="0" max="400" step="0.1" value="0">
+              <em>W</em>
+            </label>
+            <div class="inline-grid">
+              <label class="field">
+                <span>Run Time</span>
+                <input id="presetATimeInput" type="number" min="1" max="65534" step="1" value="5">
+              </label>
+              <label class="check-line">
+                <input id="presetAContinuous" type="checkbox">
+                <span>Continuous</span>
+              </label>
+            </div>
+            <button class="secondary-button" id="presetRunAButton" type="button">Run A now (test)</button>
+          </fieldset>
+
+          <fieldset class="form-group preset-card">
+            <legend>Button B</legend>
+            <label class="check-line">
+              <input id="presetBEnable" type="checkbox">
+              <span>Enable preset (key B starts it)</span>
+            </label>
+            <label class="big-input">
+              <span>CV</span>
+              <input id="presetBCvInput" type="number" min="0" max="2200" step="0.1" value="0">
+              <em>V</em>
+            </label>
+            <label class="big-input">
+              <span>CC</span>
+              <input id="presetBCcInput" type="number" min="0" max="200" step="0.1" value="0">
+              <em>mA</em>
+            </label>
+            <label class="big-input">
+              <span>CP</span>
+              <input id="presetBCpInput" type="number" min="0" max="400" step="0.1" value="0">
+              <em>W</em>
+            </label>
+            <div class="inline-grid">
+              <label class="field">
+                <span>Run Time</span>
+                <input id="presetBTimeInput" type="number" min="1" max="65534" step="1" value="10">
+              </label>
+              <label class="check-line">
+                <input id="presetBContinuous" type="checkbox" checked>
+                <span>Continuous</span>
+              </label>
+            </div>
+            <button class="secondary-button" id="presetRunBButton" type="button">Run B now (test)</button>
+          </fieldset>
+        </div>
+
+        <div class="validation-line" id="presetsValidation" hidden></div>
+
+        <div class="drawer-actions">
+          <button id="savePresetsButton" class="start-button" type="button">Save Presets to Flash</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============================================================ -->
+  <!-- Single-cycle waveform overlay (full-screen, dedicated space) -->
+  <!-- ============================================================ -->
+  <aside id="cycleOverlay" class="cycle-overlay" hidden aria-hidden="true" aria-labelledby="cycleTitle">
+    <div class="cycle-backdrop" aria-hidden="true"></div>
+    <section class="cycle-panel" role="dialog" aria-modal="true">
+      <header class="cycle-panel-head">
+        <div>
+          <h2 id="cycleTitle">Single-Cycle Waveform</h2>
+          <span id="cycleSubtitle">awaiting telemetry</span>
+        </div>
+        <button id="cycleCloseButton" class="icon-button" type="button" aria-label="Close cycle plot">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 6 8 8M14 6l-8 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+      <div class="cycle-panel-body">
+        <aside class="cycle-side" aria-label="Cycle plot signals">
+          <div class="cycle-side-section">
+            <h3>Signals</h3>
+            <div id="cycleSignalList" class="cycle-signal-list"></div>
+          </div>
+          <div class="cycle-side-section">
+            <h3>Overlay</h3>
+            <label class="check-line">
+              <input id="cycleShowPwm" type="checkbox" checked>
+              <span>PWM bands (lead / lag bridge ON)</span>
+            </label>
+            <label class="check-line">
+              <span>Y mode</span>
+              <select id="cycleYMode">
+                <option value="normalized">Normalized 0..full-scale</option>
+                <option value="physical">Per-signal full-scale</option>
+              </select>
+            </label>
+          </div>
+          <div class="cycle-side-section">
+            <h3>Notes</h3>
+            <p class="cycle-note">
+              Plot shows the 24 raw samples per period straight from the device DMA, no smoothing.
+              Slot 0 is at 0% of T_sw, slot 23 is at 95.83%; there is no sample at 100% (the next cycle's slot 0 starts there).
+              Each rank's sample-and-hold happens at a small offset from the trigger; dots are placed at the true sample instant, so you can see VPRI sit ~382 ns after VSEC inside the same trigger slot.
+            </p>
+          </div>
+        </aside>
+        <div class="cycle-canvas-wrap">
+          <canvas id="cycleCanvas"></canvas>
+        </div>
+      </div>
+    </section>
+  </aside>
+
+  <aside class="debug-panel" id="debugPanel" aria-label="Debug tools">
+    <button class="debug-panel-toggle" id="debugPanelToggle" type="button" aria-expanded="false">
+      <span>Debug Tools</span>
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="debug-panel-body" id="debugPanelBody" hidden>
+      <section class="debug-tool">
+        <header>
+          <strong>Last Enable Summary</strong>
+          <span id="debugRunActive">idle</span>
+        </header>
+        <div class="debug-tool-grid">
+          <span>Duty</span><strong id="debugRunDuty">--</strong>
+          <span>Eff</span><strong id="debugRunEff">--</strong>
+          <span>Ipri</span><strong id="debugRunIpri">--</strong>
+          <span>Isec</span><strong id="debugRunIsec">--</strong>
+          <span>Vpri</span><strong id="debugRunVpri">--</strong>
+          <span>Vsec</span><strong id="debugRunVsec">--</strong>
+        </div>
+        <p id="debugRunLastMeta">no completed enable window</p>
+        <div class="debug-copy-line" id="debugRunSummary">Click View Summary</div>
+        <div class="debug-tool-actions">
+          <button class="small-button" id="debugRunViewButton" type="button">View Summary</button>
+          <button class="small-button" id="debugRunCopyButton" type="button">Copy</button>
+        </div>
+      </section>
+    </div>
+  </aside>
+  <div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="false"></div>
+</body>
+</html>
