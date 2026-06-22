@@ -21,7 +21,7 @@
   </div>
 
   <div style="overflow: hidden; border-radius: 14px; border: 1px solid #d6dde8; background: #0f172a; box-shadow: 0 18px 44px rgba(15, 23, 42, 0.18); margin: 18px 0 24px;">
-    <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/%E5%B0%81%E9%9D%A2.png" alt="HVCCPS V1.4 封面" style="display: block; width: 100%; max-height: 620px; object-fit: cover;">
+    <img src="https://image.lceda.cn/oshwhub/pullImage/c596c4f2c02e48db8a4622354f19884a.png" alt="HVCCPS V1.4 封面" style="display: block; width: 100%; max-height: 620px; object-fit: cover;">
     <div style="padding: 18px 20px; background: #0f172a; color: #e5edf8;">
       <div style="font-size: 13px; letter-spacing: 2px; color: #38bdf8; font-weight: 800;">DIGITAL HIGH VOLTAGE DC-DC POWER SUPPLY</div>
       <div style="font-size: 28px; line-height: 1.2; font-weight: 900; margin: 6px 0 10px;">HVCCPS V1.4</div>
@@ -139,21 +139,21 @@
   <div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 14px 0 24px;">
     <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;">
       <div style="padding: 9px 12px; font-weight: 800; background: #f1f5f9; color: #0f172a;">PCB 顶层</div>
-      <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/%E9%A1%B6%E5%B1%82.png" alt="PCB 顶层" style="display: block; width: 100%;">
+      <img src="https://image.lceda.cn/oshwhub/pullImage/2c29796dbac541de83bec83f04e137e6.png" alt="PCB 顶层" style="display: block; width: 100%;">
     </div>
     <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;">
       <div style="padding: 9px 12px; font-weight: 800; background: #f1f5f9; color: #0f172a;">PCB 底层</div>
-      <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/%E5%BA%95%E5%B1%82.png" alt="PCB 底层" style="display: block; width: 100%;">
+      <img src="https://image.lceda.cn/oshwhub/pullImage/46c3b7af1b924aa08cf7887466256f91.png" alt="PCB 底层" style="display: block; width: 100%;">
     </div>
   </div>
 
   <h3 style="margin: 22px 0 8px; color: #1f2937;">3.2 电源架构</h3>
   <p>功率级采用 PSFB 移相全桥拓扑，通过改变两组桥臂之间的相移调节传输功率。</p>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/%E7%94%B5%E6%BA%90%E6%9E%B6%E6%9E%84.png" alt="电源架构" style="display: block; width: 100%; max-width: 920px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <img src="https://image.lceda.cn/oshwhub/pullImage/b349107d51914c9f8f0f85b3dfc7d57b.png" alt="电源架构" style="display: block; width: 100%; max-width: 920px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
 
   <h3 style="margin: 22px 0 8px; color: #1f2937;">3.3 硬件架构</h3>
   <p>控制器负责电压、电流、温度和辅助电源采样，并通过 HRTIM 产生带固定死区的四路全桥驱动信号。独立比较器和 HRTIM Fault 通路用于硬件过流关断。</p>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84.png" alt="硬件架构" style="display: block; width: 100%; max-width: 920px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <img src="https://image.lceda.cn/oshwhub/pullImage/86baa95a7f284a8e82966bb8c7454091.png" alt="硬件架构" style="display: block; width: 100%; max-width: 920px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
 
   <h2 id="assembly" style="margin: 34px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #0f172a; color: #0f172a;">4. 制作与装配</h2>
 
@@ -166,7 +166,7 @@
   </div>
 
   <h3 style="margin: 22px 0 8px; color: #1f2937;">4.2 变压器</h3>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/%E5%8F%98%E5%8E%8B%E5%99%A8%E6%89%93%E6%A0%B7%E5%8F%82%E6%95%B0.jpg" alt="变压器打样参数" style="display: block; width: 100%; max-width: 820px; margin: 12px auto 18px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <img src="https://image.lceda.cn/oshwhub/pullImage/55bef8b8b71141f8857a10ec88f47625.jpg" alt="变压器打样参数" style="display: block; width: 100%; max-width: 820px; margin: 12px auto 18px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
   <table style="width: 100%; border-collapse: collapse; margin: 12px 0 18px; font-size: 14px;">
     <thead><tr><th style="padding: 10px; border: 1px solid #dbe3ef; background: #0f172a; color: #fff;">项目</th><th style="padding: 10px; border: 1px solid #dbe3ef; background: #0f172a; color: #fff;">参数</th></tr></thead>
     <tbody>
@@ -207,18 +207,18 @@
   <div style="display: flex; flex-wrap: wrap; gap: 14px; margin: 14px 0 24px;">
     <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;">
       <div style="padding: 9px 12px; font-weight: 800; background: #f1f5f9; color: #0f172a;">制作完成（正面）</div>
-      <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/%E5%88%B6%E4%BD%9C%E5%AE%8C%E6%88%90.png" alt="制作完成正面" style="display: block; width: 100%;">
+      <img src="https://image.lceda.cn/oshwhub/pullImage/6640d359660946fb9f9c18479000e8ce.png" alt="制作完成正面" style="display: block; width: 100%;">
     </div>
     <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;">
       <div style="padding: 9px 12px; font-weight: 800; background: #f1f5f9; color: #0f172a;">制作完成（背面）</div>
-      <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/%E5%88%B6%E4%BD%9C%E5%AE%8C%E6%88%902.png" alt="制作完成背面" style="display: block; width: 100%;">
+      <img src="https://image.lceda.cn/oshwhub/pullImage/a42465ba650147b5ba4522648195e70e.png" alt="制作完成背面" style="display: block; width: 100%;">
     </div>
   </div>
 
   <h3 style="margin: 22px 0 8px; color: #1f2937;">4.5 输出电容</h3>
   <p>作为通用高压电源使用时，可外接 <strong>4000 V、0.2 µF</strong> 薄膜电容作为输出滤波电容（<a href="https://item.taobao.com/item.htm?id=814880889031" style="color: #0369a1; font-weight: 700;">购买链接</a>）；作为高压电容充电器使用时，可以不安装该电容。</p>
   <p>连接电容的时候先在引脚上焊接端子，再使用螺丝固定到输出端。</p>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/%E8%BE%93%E5%87%BA%E7%94%B5%E5%AE%B9%E7%9A%84%E8%BF%9E%E6%8E%A5.png" alt="输出电容连接" style="display: block; width: 100%; max-width: 820px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <img src="https://image.lceda.cn/oshwhub/pullImage/fe16bb532e42410d98fdd04c98ca2bd2.png" alt="输出电容连接" style="display: block; width: 100%; max-width: 820px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
 
   <h2 id="firmware" style="margin: 34px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #0f172a; color: #0f172a;">5. 固件烧录与 IAP 更新</h2>
 
@@ -240,7 +240,7 @@
     <li>SH1.0 转 2.54 mm 转接板</li>
     <li>SH1.0 接口连接线</li>
   </ul>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/%E5%87%86%E5%A4%87%E8%AE%BE%E5%A4%87.png" alt="烧录所需设备" style="display: block; width: 100%; max-width: 820px; margin: 12px auto 18px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <img src="https://image.lceda.cn/oshwhub/pullImage/6849ec03bda242669d860d72b38f338a.png" alt="烧录所需设备" style="display: block; width: 100%; max-width: 820px; margin: 12px auto 18px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
   <p>在电脑中下载安装 <a href="https://www.st.com/en/development-tools/stsw-link004.html" style="color: #0369a1; font-weight: 700;">STM32 ST-LINK Utility</a>，并建议先<a href="https://github.com/AzidoPP/HVCCPS-V1.4/archive/refs/heads/main.zip" style="color: #0369a1; font-weight: 700;">下载当前工程（ZIP）</a>或使用<a href="https://azidopp.github.io/HVCCPS-V1.4/BootLoaderHostUI/" style="color: #0369a1; font-weight: 700;">在线烧录器</a>或<a href="https://azidopp.github.io/HVCCPS-V1.4/AppHostUI/" style="color: #0369a1; font-weight: 700;">在线上位机</a>。</p>
   <p><strong>完整操作过程见：<a href="https://github.com/AzidoPP/HVCCPS-V1.4/releases/download/videos-v1.4/HVCCPS-V1.4-Flashing-Tutorial.mp4" style="color: #0369a1;">固件烧录视频教程</a>。</strong></p>
 
@@ -263,14 +263,14 @@
     <li>将板卡的 <code>SWCLK</code>、<code>SWDIO</code>、<code>GND</code> 和 <code>3.3 V</code> 与 ST-Link V2 对应连接。</li>
     <li>打开 STM32 ST-LINK Utility，选择 Bootloader HEX 文件并执行烧录。</li>
   </ol>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/stlinkutility.png" alt="使用 ST-LINK Utility 烧录 Bootloader" style="display: block; width: 100%; max-width: 820px; margin: 12px auto 18px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <img src="https://image.lceda.cn/oshwhub/pullImage/38f43fc627214e75aa7420e296def66e.png" alt="使用 ST-LINK Utility 烧录 Bootloader" style="display: block; width: 100%; max-width: 820px; margin: 12px auto 18px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
   <ol start="3" style="margin: 8px 0 18px; padding-left: 24px;">
     <li>烧录完成后复位板卡；若 <code>LED_A</code> 点亮，说明 Bootloader 已正常启动。</li>
     <li>断开 ST-Link，改用 USB 转 TTL 模块连接板卡的 <code>TX</code>、<code>RX</code>、<code>GND</code> 和 <code>3.3 V</code>，其中 TX 与 RX 需要交叉连接。</li>
     <li>推荐在已下载的工程中打开 <a href="https://github.com/AzidoPP/HVCCPS-V1.4/blob/main/BootLoaderHostUI/index.html" style="color: #0369a1; font-weight: 700;">BootLoaderHostUI/index.html</a>；也可以直接使用<a href="https://azidopp.github.io/HVCCPS-V1.4/BootLoaderHostUI/" style="color: #0369a1; font-weight: 700;">在线 IAP 烧录页面</a>。请使用最新版 Chrome 或 Edge。</li>
     <li>在页面中连接串口并选择 App HEX 文件，点击烧录后按下板卡的 <strong>RST</strong> 键。</li>
   </ol>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/IAP%E7%83%A7%E5%BD%95.png" alt="使用 IAP 页面烧录 App 固件" style="display: block; width: 100%; max-width: 820px; margin: 12px auto 18px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <img src="https://image.lceda.cn/oshwhub/pullImage/6512dad1e02b4845b77f222e0731e220.png" alt="使用 IAP 页面烧录 App 固件" style="display: block; width: 100%; max-width: 820px; margin: 12px auto 18px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
   <ol start="7" style="margin: 8px 0 18px; padding-left: 24px;">
     <li>等待传输和校验完成。再次复位板卡后，若 <code>LED_A</code> 持续闪烁，说明 App 已成功启动。</li>
   </ol>
@@ -288,12 +288,12 @@
     <li>PI、开关频率、自动变频及软启动参数配置</li>
     <li>前面板 A/B 按键预设管理</li>
   </ul>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/hostui.png" alt="hostui" style="display: block; width: 100%; max-width: 920px; margin: 12px auto 18px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <img src="https://image.lceda.cn/oshwhub/pullImage/41dbbd78c6a14702a8850ca1d7ec0439.png" alt="hostui" style="display: block; width: 100%; max-width: 920px; margin: 12px auto 18px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
   <p>连接参数为 <strong>115200 baud、8N1</strong>。建议使用最新版 Chrome 或 Edge。</p>
 
   <h3 style="margin: 22px 0 8px; color: #1f2937;">6.2 Bootloader 上位机</h3>
   <p>本地页面 <a href="https://github.com/AzidoPP/HVCCPS-V1.4/blob/main/BootLoaderHostUI/index.html" style="color: #0369a1; font-weight: 700;">BootLoaderHostUI/index.html</a> 和<a href="https://azidopp.github.io/HVCCPS-V1.4/BootLoaderHostUI/" style="color: #0369a1; font-weight: 700;">在线 IAP 烧录页面</a>均支持 Intel HEX 解析、地址范围校验、串口握手、分块传输、进度显示和错误日志，仅用于更新 App 固件。</p>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/iapui.png" alt="iapui" style="display: block; width: 100%; max-width: 920px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <img src="https://image.lceda.cn/oshwhub/pullImage/f88bce7b1618450e84d71942d73f5c17.png" alt="iapui" style="display: block; width: 100%; max-width: 920px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
 
   <h2 id="test" style="margin: 34px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #0f172a; color: #0f172a;">7. 测试</h2>
   <p>本项目的教程及测试视频统一收录在 <a href="https://github.com/AzidoPP/HVCCPS-V1.4/releases/tag/videos-v1.4" style="color: #0369a1; font-weight: 700;">HVCCPS V1.4 视频教程与测试 Release</a> 中。</p>
@@ -306,12 +306,12 @@
   <h3 style="margin: 22px 0 8px; color: #1f2937;">7.1 ZVS 零电压开通</h3>
   <p>实测主功率管能够实现 ZVS 零电压开通：开关节点电压先降至 0 V 附近，随后栅极驱动信号到来并使 MOSFET 导通。移相全桥利用变压器漏感续流实现软开关，以降低高频开关损耗。</p>
   <p>示波器探头连接方式如下：</p>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Test_Data/oscilloscope-connection.png" alt="ZVS 测试探头连接" style="display: block; width: 100%; max-width: 820px; margin: 12px auto 18px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <img src="https://image.lceda.cn/oshwhub/pullImage/5a5729cd4cd94275a723c7829a9dc62c.png" alt="ZVS 测试探头连接" style="display: block; width: 100%; max-width: 820px; margin: 12px auto 18px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
   <p>测试重点观察较难实现 ZVS 的滞后桥臂下管；当滞后桥臂满足 ZVS 条件时，超前桥臂通常也能实现 ZVS。</p>
   <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0 18px;">
-    <div style="flex: 1 1 260px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">ZVS 波形 1</div><img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Test_Data/ZVS-waveform1.png" alt="ZVS 波形 1" style="display: block; width: 100%;"></div>
-    <div style="flex: 1 1 260px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">ZVS 波形 2</div><img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Test_Data/ZVS-waveform2.png" alt="ZVS 波形 2" style="display: block; width: 100%;"></div>
-    <div style="flex: 1 1 260px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">ZVS 波形 3</div><img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Test_Data/ZVS-waveform3.png" alt="ZVS 波形 3" style="display: block; width: 100%;"></div>
+    <div style="flex: 1 1 260px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">ZVS 波形 1</div><img src="https://image.lceda.cn/oshwhub/pullImage/4d54e5a30e12479489c3e1627275b0eb.png" alt="ZVS 波形 1" style="display: block; width: 100%;"></div>
+    <div style="flex: 1 1 260px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">ZVS 波形 2</div><img src="https://image.lceda.cn/oshwhub/pullImage/40796f044c9c4a83b60e77b274b3b40f.png" alt="ZVS 波形 2" style="display: block; width: 100%;"></div>
+    <div style="flex: 1 1 260px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">ZVS 波形 3</div><img src="https://image.lceda.cn/oshwhub/pullImage/a66d5b1b37a3442cbc7921ef9c1f7d91.png" alt="ZVS 波形 3" style="display: block; width: 100%;"></div>
   </div>
   <p>图中蓝色波形为滞后桥臂 SW，红色波形为超前桥臂 SW，黄色波形为滞后桥臂下管的栅极驱动信号。</p>
   <div style="border-left: 5px solid #2563eb; padding: 11px 14px; background: #eff6ff; margin: 14px 0 22px; border-radius: 0 10px 10px 0;">
@@ -322,22 +322,22 @@
   <h3 style="margin: 22px 0 8px; color: #1f2937;">7.2 电流波形</h3>
   <h4 style="margin: 18px 0 8px; color: #334155;">原边电流</h4>
   <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0 18px;">
-    <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">原边电流波形 1</div><img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Test_Data/50kHz/%E5%8E%9F%E8%BE%B9%E7%94%B5%E6%B5%81/_74.png" alt="原边电流波形 1" style="display: block; width: 100%;"></div>
-    <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">原边电流波形 2</div><img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Test_Data/50kHz/%E5%8E%9F%E8%BE%B9%E7%94%B5%E6%B5%81/_78.png" alt="原边电流波形 2" style="display: block; width: 100%;"></div>
+    <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">原边电流波形 1</div><img src="https://image.lceda.cn/oshwhub/pullImage/9fe67f698f2a4fd7a7a3a64bcfd8a83d.png" alt="原边电流波形 1" style="display: block; width: 100%;"></div>
+    <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">原边电流波形 2</div><img src="https://image.lceda.cn/oshwhub/pullImage/e1297cf75bef4f3fbe2852a99b9cac63.png" alt="原边电流波形 2" style="display: block; width: 100%;"></div>
   </div>
   <p>图中蓝色波形为滞后桥臂 SW，红色波形为超前桥臂 SW，黄色波形为电流互感器信号经整流采样后转换得到的电压信号。</p>
 
   <h4 style="margin: 18px 0 8px; color: #334155;">副边电流</h4>
   <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0 18px;">
-    <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">副边电流波形 1</div><img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Test_Data/50kHz/%E5%89%AF%E8%BE%B9%E7%94%B5%E6%B5%81/_67.png" alt="副边电流波形 1" style="display: block; width: 100%;"></div>
-    <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">副边电流波形 2</div><img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Test_Data/50kHz/%E5%89%AF%E8%BE%B9%E7%94%B5%E6%B5%81/_69.png" alt="副边电流波形 2" style="display: block; width: 100%;"></div>
+    <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">副边电流波形 1</div><img src="https://image.lceda.cn/oshwhub/pullImage/0602681886c44358835bb51e7f6bbf63.png" alt="副边电流波形 1" style="display: block; width: 100%;"></div>
+    <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">副边电流波形 2</div><img src="https://image.lceda.cn/oshwhub/pullImage/3b308e9f52634190aed3617cb1d7271f.png" alt="副边电流波形 2" style="display: block; width: 100%;"></div>
   </div>
   <p>图中蓝色波形为滞后桥臂 SW，红色波形为超前桥臂 SW，黄色波形为 AMC1301 采样信号经差分放大后反馈至原边的电压信号。</p>
 
   <h3 style="margin: 22px 0 8px; color: #1f2937;">7.3 电压波形</h3>
   <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0 18px;">
-    <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">副边电压波形 1</div><img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Test_Data/50kHz/%E5%B0%86%E8%BE%93%E5%85%A5%E6%BB%A4%E6%B3%A2%E7%94%B5%E5%AE%B9%E6%94%B9%E4%B8%BA1nF%E5%90%8E%E7%94%B5%E5%8E%8B%E5%8F%8D%E9%A6%88/313V-60.png" alt="副边电压波形 1" style="display: block; width: 100%;"></div>
-    <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">副边电压波形 2</div><img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Test_Data/50kHz/%E5%B0%86%E8%BE%93%E5%85%A5%E6%BB%A4%E6%B3%A2%E7%94%B5%E5%AE%B9%E6%94%B9%E4%B8%BA1nF%E5%90%8E%E7%94%B5%E5%8E%8B%E5%8F%8D%E9%A6%88/370V-100.png" alt="副边电压波形 2" style="display: block; width: 100%;"></div>
+    <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">副边电压波形 1</div><img src="https://image.lceda.cn/oshwhub/pullImage/c1ced01a821f4a0e95371ffe9b088f03.png" alt="副边电压波形 1" style="display: block; width: 100%;"></div>
+    <div style="flex: 1 1 320px; border: 1px solid #dbe3ef; border-radius: 12px; overflow: hidden; background: #fff;"><div style="padding: 8px 10px; background: #f1f5f9; font-weight: 800;">副边电压波形 2</div><img src="https://image.lceda.cn/oshwhub/pullImage/494dc2b0f29b4177af55c49b78e236f3.png" alt="副边电压波形 2" style="display: block; width: 100%;"></div>
   </div>
   <p>图中蓝色波形为滞后桥臂 SW，红色波形为超前桥臂 SW，黄色波形为 AMC1311B 采样信号经差分放大后反馈至原边的电压信号。</p>
   <div style="border-left: 5px solid #2563eb; padding: 11px 14px; background: #eff6ff; margin: 14px 0 22px; border-radius: 0 10px 10px 0;">
@@ -348,17 +348,20 @@
   <h3 style="margin: 22px 0 8px; color: #1f2937;">7.4 电容恒流充电测试</h3>
   <p><a href="https://github.com/AzidoPP/HVCCPS-V1.4/releases/download/videos-v1.4/HVCCPS-V1.4-Capacitor-CC-Charging-Test.mp4" style="color: #0369a1; font-weight: 700;">观看完整测试视频</a></p>
   <p>测试使用两个 1100 µF 电容串联，等效容量约为 550 µF；上位机设置目标电压为 2000 V、限流为 200 mA。整个充电过程约耗时 5.6 s，电容电压基本呈线性上升，峰值输出功率约为 390 W。根据电容储能公式计算，平均充电功率约为 195 W。</p>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/test-capacitor-cc-6s.jpg" alt="电容恒流充电测试第 6 秒画面" style="display: block; width: 100%; max-width: 680px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <img src="https://image.lceda.cn/oshwhub/pullImage/3de0009200974f91ab8fa34ff4fd6f4c.jpg" alt="电容恒流充电测试第 6 秒画面" style="display: block; width: 100%; max-width: 680px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
 
   <h3 style="margin: 22px 0 8px; color: #1f2937;">7.5 阻性负载恒压测试</h3>
   <p><a href="https://github.com/AzidoPP/HVCCPS-V1.4/releases/download/videos-v1.4/HVCCPS-V1.4-Resistive-CV-Test.mp4" style="color: #0369a1; font-weight: 700;">观看完整测试视频</a></p>
   <p>测试将 5 kΩ 铝壳电阻连接至输出端，并将输出电压设定为 800 V。测试过程中输出电压保持稳定，用于验证恒压环路及持续输出能力。</p>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/test-resistive-cv-9s.jpg" alt="阻性负载恒压测试第 9 秒画面" style="display: block; width: 100%; max-width: 680px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <img src="https://image.lceda.cn/oshwhub/pullImage/25db73a166ae4cfd820d96cf77618603.jpg" alt="阻性负载恒压测试第 9 秒画面" style="display: block; width: 100%; max-width: 680px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
 
   <h3 style="margin: 22px 0 8px; color: #1f2937;">7.6 拉弧测试</h3>
   <p><a href="https://github.com/AzidoPP/HVCCPS-V1.4/releases/download/videos-v1.4/HVCCPS-V1.4-Arc-Test.mp4" style="color: #0369a1; font-weight: 700;">观看完整测试视频</a></p>
   <p>拉弧测试用于直观展示高压输出效果。</p>
-  <img src="https://raw.githubusercontent.com/AzidoPP/HVCCPS-V1.4/main/Docs/test-arc-10s.jpg" alt="拉弧测试第 10 秒画面" style="display: block; width: 100%; max-width: 680px; margin: 12px auto 24px; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);">
+  <div style="margin: 12px auto 24px; max-width: 680px; padding: 14px 16px; border-radius: 12px; border: 1px solid #fecaca; background: #fff5f5;">
+    <strong style="color: #b91c1c;">拉弧测试画面</strong><br>
+    该画面可能触发图片审核限制，请前往 GitHub 查看：<a href="https://github.com/AzidoPP/HVCCPS-V1.4/blob/main/Docs/test-arc-10s.jpg" style="color: #0369a1; font-weight: 800;">test-arc-10s.jpg</a>
+  </div>
 
   <h2 id="license" style="margin: 34px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #0f172a; color: #0f172a;">8. 许可证与修改记录</h2>
   <p>本仓库采用 <a href="https://github.com/AzidoPP/HVCCPS-V1.4/blob/main/LICENSE" style="color: #0369a1; font-weight: 700;">GPL-3.0</a> 许可证。项目的版本变化和详细修改内容见 <a href="https://github.com/AzidoPP/HVCCPS-V1.4/blob/main/log.md" style="color: #0369a1; font-weight: 700;">log.md</a>。</p>

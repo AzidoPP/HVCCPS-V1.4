@@ -66,6 +66,7 @@ $RECYCLE.BIN/
 
 # ===== Local video sources (published as GitHub Release assets) =====
 /Videos/*.mp4
+/videos_compressed/
 
 # ===== Node / HostUI dev artifacts (if added later) =====
 node_modules/
