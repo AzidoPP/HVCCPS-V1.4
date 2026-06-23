@@ -61,7 +61,7 @@ function formatSig(value, digits = 4) {
   if (!Number.isFinite(value)) return "0";
   if (Object.is(value, -0) || value === 0) return "0";
   const text = Number(value).toPrecision(digits);
-  return text.includes("e") ? text : text.replace(/\.?0+$/, "");
+  return text.includes(".") ? text.replace(/\.?0+$/, "") : text;
 }
 
 function formatVoltageMv(mV) {
