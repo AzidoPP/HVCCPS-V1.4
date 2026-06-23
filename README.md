@@ -4,6 +4,8 @@
 [![YouTube](https://img.shields.io/badge/YouTube-white?logo=youtube&logoColor=FF0000)](https://www.youtube.com/@lyyontop)
 [![GitHub last commit](https://img.shields.io/github/last-commit/AzidoPP/HVCCPS-V1.4?color=yellow&logo=github&labelColor=black&label=Latest)](https://github.com/AzidoPP/HVCCPS-V1.4)
 
+📺 **项目说明视频：** [在哔哩哔哩观看](https://www.bilibili.com/video/BV1GMjm6cExY)
+
 **QQ交流群：582594264**
 
 > [!CAUTION]
