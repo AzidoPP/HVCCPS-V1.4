@@ -324,6 +324,9 @@ PCB 采用 **4 层、1.6 mm 板厚、1 oz 铜厚**设计，常用阻容器件全
 |---|---|
 | ![150 V 输出电压纹波](Test_Data/voltage-ripple-150V.png) | ![230 V 输出电压纹波](Test_Data/voltage-ripple-230V.png) |
 
+> [!NOTE]
+> 由于没有高压探头，所以先在较低压范围测试。
+
 ### 7.6 电容恒流充电测试
 
 [观看完整测试视频](https://github.com/AzidoPP/HVCCPS-V1.4/releases/download/videos-v1.4/HVCCPS-V1.4-Capacitor-CC-Charging-Test.mp4)
