@@ -1028,7 +1028,7 @@ function parseCommandInputs() {
   }
 
   return {
-    cvMv: Math.round(cvV * 1000),
+    cvMv: Math.round(cvV) * 1000,
     ccMa: Math.round(ccMa),
     cpMw: Math.round(cpW * 1000),
     runSeconds,
@@ -1648,7 +1648,7 @@ function readOnePreset(which) {
   }
   return {
     enable: els.enable.checked ? 1 : 0,
-    cvMv: Math.round(cvV * 1000),
+    cvMv: Math.round(cvV) * 1000,
     ccMa: Math.round(ccMa),
     cpMw: Math.round(cpW * 1000),
     timeS,
