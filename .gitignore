@@ -76,3 +76,4 @@ dist/
 # ===== Claude Code local config (per-machine settings) =====
 .claude/
 CLAUDE.local.md
+AGENTS.md

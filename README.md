@@ -63,12 +63,36 @@ PCB 使用 EasyEDA（立创 EDA 专业版）设计，仓库提供完整的 [Easy
 | 固定占空比模式 | 0–100% | 仅用于调试，仍受软启动约束 |
 | 软启动 | 每个控制周期最多增加 10% 占空比 | 默认值，可通过上位机配置管理器调整 |
 | 运行定时 | 连续或 1–65534 s | 到时自动关闭输出 |
+| 供电 UVLO / OVP | 母线 >32 V；12 V、5 V、3.3 V 窗口保护 | 下位机内部抑制实际输出，软件 enable 与通讯保持 |
 | 硬件过流保护（OCP） | 原边 SW 节点交流峰值约 60 A | COMP1 → HRTIM FAULT4 异步关断；**不是 60 A 输入额定值** |
 | 软件过温保护（OTP） | 70 °C | MOS NTC 或 MCU 内部温度任一路超过阈值即关断 |
 | 独立看门狗（IWDG） | 约 200 ms | 主循环或控制 ISR 异常时触发复位 |
 | 按键 | A / B 两组预设 | 可保存 CV、CC、CP 和运行时间，支持脱机运行及停机 |
 
 OCP 和 OTP 触发后均会锁存停机状态。再次启动时固件会清除锁存；如果故障条件仍然存在，保护会立即再次触发。
+
+#### 控制策略框图
+
+```mermaid
+flowchart LR
+  Host["上位机 / A-B 按键<br/>CV、CC、CP、运行时间"] --> Cmd["运行目标与 active 配置<br/>PI 参数、软启动、变频策略"]
+  ADC["同步 ADC 采样<br/>VSEC / ISEC / VPRI / IPRI_DC<br/>AUX12 / AUX5 / VCC / 温度"] --> Filter["全周期聚合与滤波<br/>24 点高速均值/峰值<br/>辅助电源滑动平均"]
+  Filter --> Protect{"保护判断"}
+  Protect -->|"UVLO/OVP 或 OTP"| GateOff["实际输出关断<br/>duty = 0"]
+  Protect -->|"OCP"| Fault["HRTIM FAULT4<br/>硬件异步关断"]
+  Protect -->|"正常"| Fb["反馈量<br/>Vout、Iout、Pin/Pout"]
+  Cmd --> PI["三环 PI 并行计算<br/>CV：电压误差<br/>CC：副边电流误差<br/>CP：功率误差"]
+  Fb --> PI
+  PI --> Min["min(CC, CV, CP)<br/>低占空比者接管"]
+  Min --> Slew["软启动限速<br/>只限制 duty 上升"]
+  Slew --> Duty["移相 duty → HRTIM CMP3"]
+  Duty --> PSFB["PSFB 功率级<br/>固定约 200 ns 死区"]
+  PSFB --> ADC
+  Duty --> Freq["TIM7 自动变频监督<br/>按 duty 计分与前馈"]
+  Freq --> Duty
+```
+
+控制器本质上是 **三环并联的占空比限制器**：CV、CC、CP 三个 PI 同时给出允许的移相占空比，固件取其中最小值作为实际控制量，再经过软启动限速后写入 HRTIM。
 
 ### 2.3 控制器与通信参数
 
@@ -183,7 +207,7 @@ PCB 采用 **4 层、1.6 mm 板厚、1 oz 铜厚**设计，常用阻容器件全
 | 固件 | 起始地址 | 作用 |
 |---|---|---|
 | [Bootloader HEX](https://github.com/AzidoPP/HVCCPS-V1.4/releases/download/v0.0.1/HVCCPS_Bootloader_V0.0.1.hex) | `0x08000000` | 启动检查及串口 IAP 更新 |
-| [App HEX](https://github.com/AzidoPP/HVCCPS-V1.4/releases/download/v0.0.1/HVCCPS_App_V0.0.1.hex) | `0x08004000` | 电源控制、保护、遥测和上位机通信 |
+| [App HEX](https://github.com/AzidoPP/HVCCPS-V1.4/releases/download/v0.0.2/HVCCPS_App_V0.0.2.hex) | `0x08004000` | 电源控制、保护、遥测和上位机通信 |
 
 ### 5.2 烧录准备
 
