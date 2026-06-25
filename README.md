@@ -71,29 +71,6 @@ PCB 使用 EasyEDA（立创 EDA 专业版）设计，仓库提供完整的 [Easy
 
 OCP 和 OTP 触发后均会锁存停机状态。再次启动时固件会清除锁存；如果故障条件仍然存在，保护会立即再次触发。
 
-#### 控制策略框图
-
-```mermaid
-flowchart LR
-  Host["上位机 / A-B 按键<br/>CV、CC、CP、运行时间"] --> Cmd["运行目标与 active 配置<br/>PI 参数、软启动、变频策略"]
-  ADC["同步 ADC 采样<br/>VSEC / ISEC / VPRI / IPRI_DC<br/>AUX12 / AUX5 / VCC / 温度"] --> Filter["全周期聚合与滤波<br/>24 点高速均值/峰值<br/>辅助电源滑动平均"]
-  Filter --> Protect{"保护判断"}
-  Protect -->|"UVLO/OVP 或 OTP"| GateOff["实际输出关断<br/>duty = 0"]
-  Protect -->|"OCP"| Fault["HRTIM FAULT4<br/>硬件异步关断"]
-  Protect -->|"正常"| Fb["反馈量<br/>Vout、Iout、Pin/Pout"]
-  Cmd --> PI["三环 PI 并行计算<br/>CV：电压误差<br/>CC：副边电流误差<br/>CP：功率误差"]
-  Fb --> PI
-  PI --> Min["min(CC, CV, CP)<br/>低占空比者接管"]
-  Min --> Slew["软启动限速<br/>只限制 duty 上升"]
-  Slew --> Duty["移相 duty → HRTIM CMP3"]
-  Duty --> PSFB["PSFB 功率级<br/>固定约 200 ns 死区"]
-  PSFB --> ADC
-  Duty --> Freq["TIM7 自动变频监督<br/>按 duty 计分与前馈"]
-  Freq --> Duty
-```
-
-控制器本质上是 **三环并联的占空比限制器**：CV、CC、CP 三个 PI 同时给出允许的移相占空比，固件取其中最小值作为实际控制量，再经过软启动限速后写入 HRTIM。
-
 ### 2.3 控制器与通信参数
 
 | 项目 | 参数 |
@@ -113,7 +90,7 @@ flowchart LR
 
 如需更高输出电压，必须重新核算并验证变压器匝比、整流二极管、输出电容和反馈网络，同时修改固件参数。
 
-## 3. 硬件架构
+## 3. 架构
 
 ### 3.1 PCB 布局
 
@@ -134,6 +111,30 @@ PCB 采用 **4 层、1.6 mm 板厚、1 oz 铜厚**设计，常用阻容器件全
 控制器负责电压、电流、温度和辅助电源采样，并通过 HRTIM 产生带固定死区的四路全桥驱动信号。独立比较器和 HRTIM Fault 通路用于硬件过流关断。
 
 ![硬件架构](Docs/硬件架构.png)
+
+### 3.4 控制策略架构
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": true, "nodeSpacing": 70, "rankSpacing": 95}, "themeVariables": {"fontSize": "18px"}} }%%
+flowchart LR
+  Host["上位机 / A-B 按键<br/>CV、CC、CP、运行时间"] --> Cmd["运行目标与 active 配置<br/>PI 参数、软启动、变频策略"]
+  ADC["同步 ADC 采样<br/>VSEC / ISEC / VPRI / IPRI_DC<br/>AUX12 / AUX5 / VCC / 温度"] --> Filter["全周期聚合与滤波<br/>24 点高速均值/峰值<br/>辅助电源滑动平均"]
+  Filter --> Protect{"保护判断"}
+  Protect -->|"UVLO/OVP 或 OTP"| GateOff["实际输出关断<br/>duty = 0"]
+  Protect -->|"OCP"| Fault["HRTIM FAULT4<br/>硬件异步关断"]
+  Protect -->|"正常"| Fb["反馈量<br/>Vout、Iout、Pin/Pout"]
+  Cmd --> PI["三环 PI 并行计算<br/>CV：电压误差<br/>CC：副边电流误差<br/>CP：功率误差"]
+  Fb --> PI
+  PI --> Min["min(CC, CV, CP)<br/>低占空比者接管"]
+  Min --> Slew["软启动限速<br/>只限制 duty 上升"]
+  Slew --> Duty["移相 duty → HRTIM CMP3"]
+  Duty --> PSFB["PSFB 功率级<br/>固定约 200 ns 死区"]
+  PSFB --> ADC
+  Duty --> Freq["TIM7 自动变频监督<br/>按 duty 计分与前馈"]
+  Freq --> Duty
+```
+
+控制器本质上是 **三环并联的占空比限制器**：CV、CC、CP 三个 PI 同时给出允许的移相占空比，固件取其中最小值作为实际控制量，再经过软启动限速后写入 HRTIM。
 
 ## 4. 制作与装配
 
