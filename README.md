@@ -3,6 +3,7 @@
 [![Bilibili followers](https://img.shields.io/badge/dynamic/json?color=blue&label=BiliBili&labelColor=white&query=$.data.follower&url=https://api.bilibili.com/x/relation/stat?vmid=1084866085&logo=bilibili)](https://space.bilibili.com/1084866085)
 [![YouTube](https://img.shields.io/badge/YouTube-white?logo=youtube&logoColor=FF0000)](https://www.youtube.com/@lyyontop)
 [![GitHub last commit](https://img.shields.io/github/last-commit/AzidoPP/HVCCPS-V1.4?color=yellow&logo=github&labelColor=black&label=Latest)](https://github.com/AzidoPP/HVCCPS-V1.4)
+[![Star History Chart](https://api.star-history.com/svg?repos=AzidoPP/HVCCPS-V1.4&type=date&legend=top-left)](https://www.star-history.com/#AzidoPP/HVCCPS-V1.4&type=date&legend=top-left)
 
 📺 **项目说明视频：** [在哔哩哔哩观看](https://www.bilibili.com/video/BV1GMjm6cExY)
 
