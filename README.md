@@ -1,4 +1,4 @@
-# HVCCPS V1.4
+﻿# HVCCPS V1.4
 
 [![Bilibili followers](https://img.shields.io/badge/dynamic/json?color=blue&label=BiliBili&labelColor=white&query=$.data.follower&url=https://api.bilibili.com/x/relation/stat?vmid=1084866085&logo=bilibili)](https://space.bilibili.com/1084866085)
 [![YouTube](https://img.shields.io/badge/YouTube-white?logo=youtube&logoColor=FF0000)](https://www.youtube.com/@lyyontop)
@@ -145,7 +145,8 @@ flowchart LR
 
 - 层数：4 层
 - 板厚：1.6 mm
-- 铜厚：1 oz
+- 外层铜厚：1 oz
+- 内层铜厚：0.5 oz
 
 ### 4.2 变压器
 
